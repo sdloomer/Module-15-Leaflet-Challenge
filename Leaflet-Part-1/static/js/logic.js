@@ -57,7 +57,8 @@ d3.json(url).then(function(data) {
         onEachFeature: function(feature, layer) {
             layer.bindPopup(
                 "Magnitude: " + feature.properties.mag + 
-                "<br>Location: " + feature.properties.place
+                "<br>Location: " + feature.properties.place +
+                "<br>Depth " + feature.geometry.coordinates[2]
             );
         }
     }).addTo(myMap);
