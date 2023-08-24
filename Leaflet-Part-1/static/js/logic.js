@@ -30,13 +30,13 @@ d3.json(url).then(function(data) {
             case earthquakeDepth > 90:
                 return "red";
             case earthquakeDepth > 70:
-                return "redorange";
+                return "darkorange";
             case earthquakeDepth > 50:
                 return "orange";
             case earthquakeDepth > 30:
-                return "orangeyellow";
+                return "yellow";
             case earthquakeDepth > 10:
-                return "yellowgreen";
+                return "lightgreen";
             default:
                 return "green";
         }
@@ -66,17 +66,18 @@ d3.json(url).then(function(data) {
         position: "bottomright"
     });
 
-    legend.onAdd = function() {
-        var div = L.DomUtil.create("div", "info legend");
+    legend.onAdd = function(myMap) {
+        var div = L.DomUtil.create("div", "info legend")
         var grades = [-10, 10, 30, 50, 70, 90]
-        var colors = ["green", "yellowgreen", "orangeyellow", "orange", "redorange", "red"];
+        var colors = ["green", "lightgreen", "yellow", "orange", "darkorange", "red"];
     
         for (var i = 0; i < grades.length; i++) {
-            div.innerHTML += '<i style="background:' + colors[i] + '"></i> ' +
+            div.innerHTML += '<i style="background: ' + getColor(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
-        return div;
+    }
+    return div;
     ;}
+    
     legend.addTo(myMap);
 });
 
